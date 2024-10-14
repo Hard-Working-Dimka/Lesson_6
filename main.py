@@ -1,3 +1,5 @@
+from curses.ascii import isalpha
+
 import urwid
 
 
@@ -22,7 +24,7 @@ def has_lower_letters(password):
 
 
 def has_symbols(password):
-    return any(symbol in '''!"№;%:?*()'_@#$^&~{}`|\\''' for symbol in password)
+    return any(not symbol.isdigit() and not symbol.isalpha() for symbol in password)
 
 
 def password_rating(password):
@@ -40,13 +42,17 @@ def password_rating(password):
     return rating
 
 
-def on_ask_change(edit, new_password):
-    reply.set_text("Ваш пароль имеет рейтинг: %s" % password_rating(new_password))
+def main():
+    def on_ask_change(edit, new_password):
+        reply.set_text("Ваш пароль имеет рейтинг: %s" % password_rating(new_password))
+
+    ask = urwid.Edit('Введите пароль: ', mask='*')
+    reply = urwid.Text('')
+    menu = urwid.Pile([ask, reply])
+    menu = urwid.Filler(menu, valign='top')
+    urwid.connect_signal(ask, 'change', on_ask_change)
+    urwid.MainLoop(menu).run()
 
 
-ask = urwid.Edit('Введите пароль: ', mask='*')
-reply = urwid.Text('')
-menu = urwid.Pile([ask, reply])
-menu = urwid.Filler(menu, valign='top')
-urwid.connect_signal(ask, 'change', on_ask_change)
-urwid.MainLoop(menu).run()
+if __name__ == '__main__':
+    main()

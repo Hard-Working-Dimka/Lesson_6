@@ -27,9 +27,13 @@ def has_symbols(password):
 
 def password_rating(password):
     rating = 0
-    password_verification = [is_very_long(password), has_digit(password), has_letters(password),
-                             as_upper_letters(password),
-                             has_lower_letters(password), has_symbols(password)]
+    password_verification = [
+        is_very_long(password),
+        has_digit(password),
+        has_letters(password),
+        as_upper_letters(password),
+        has_lower_letters(password), has_symbols(password),
+    ]
     for check in password_verification:
         if check:
             rating = rating + 2

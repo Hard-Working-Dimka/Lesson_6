@@ -1,5 +1,3 @@
-from curses.ascii import isalpha
-
 import urwid
 
 

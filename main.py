@@ -32,7 +32,8 @@ def password_rating(password):
         has_digit(password),
         has_letters(password),
         as_upper_letters(password),
-        has_lower_letters(password), has_symbols(password),
+        has_lower_letters(password),
+        has_symbols(password),
     ]
     for check in password_verification:
         if check:

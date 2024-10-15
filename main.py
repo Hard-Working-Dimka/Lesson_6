@@ -40,17 +40,14 @@ def password_rating(password):
     return rating
 
 
-def main():
-    def on_ask_change(edit, new_password):
-        reply.set_text("Ваш пароль имеет рейтинг: %s" % password_rating(new_password))
+def on_ask_change(edit, new_password):
+    reply.set_text("Ваш пароль имеет рейтинг: %s" % password_rating(new_password))
 
+
+if __name__ == '__main__':
     ask = urwid.Edit('Введите пароль: ', mask='*')
     reply = urwid.Text('')
     menu = urwid.Pile([ask, reply])
     menu = urwid.Filler(menu, valign='top')
     urwid.connect_signal(ask, 'change', on_ask_change)
     urwid.MainLoop(menu).run()
-
-
-if __name__ == '__main__':
-    main()

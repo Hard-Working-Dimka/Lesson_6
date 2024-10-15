@@ -41,6 +41,9 @@ def password_rating(password):
     return rating
 
 
+# TODO: чтобы создать def main, нужно reply передать аргументом в функцию on_ask_change,
+#  а так же указать ее в urwid.connect_signal
+
 def on_ask_change(edit, new_password):
     reply.set_text("Ваш пароль имеет рейтинг: %s" % password_rating(new_password))
 
